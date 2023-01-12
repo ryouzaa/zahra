@@ -2,9 +2,9 @@
 
 include "../conn.php";
 
-$id = $_POST['Kd_Paket_Menu'];
+$id = $_GET['id'];
 
-$sql = "DELETE FROM paket_menu WHERE Kd_Paket_Menu=$id";
+$sql = "DELETE FROM paket_menu WHERE Kd_Paket_Menu='$id'";
 
 if ($conn->query($sql) === TRUE) {
   echo "</script>alert('Record deleted successfully');";

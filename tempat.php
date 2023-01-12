@@ -1,3 +1,6 @@
+<?php 
+    include_once "assets/lib/conn.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +33,8 @@
     </nav>
     <div class="container">
         <h2 class="text-center" style="margin-top:25px;">Data Tempat</h2>
+<a href="pages/add_tempat.php" class="btn btn-primary">ADD DATA</a>
+
         <table class="table">
             <thead>
                 <tr>
@@ -41,13 +46,25 @@
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                    
+                    $sql = "SELECT * FROM tempat";
+
+                    $result = $conn->query($sql);
+
+                    $no = 1 ; 
+
+                    while($row = $result->fetch_assoc()){
+
+                ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>EDIT | DELETE</td>
+                    <th scope="row"><?=$no++?></th>
+                    <td><?=$row['Kd_Tempat']?></td>
+                    <td><?=$row['Lokasi_Ruangan']?></td>
+                    <td><?=$row['Jumlah_Kursi']?></td>
+                    <td><a href="pages/edit_tempat.php?id=<?=$row['Kd_Tempat']?>">EDIT</a> | <a href="assets/lib/tempat/tempat_delete.php?id=<?=$row['Kd_Tempat']?>">DELETE</a></td>
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

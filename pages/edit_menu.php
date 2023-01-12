@@ -1,3 +1,9 @@
+<?php 
+    include_once "../assets/lib/conn.php";
+    $id = $_GET['id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,25 +36,34 @@
     </nav>
     <div class="container">
         <h2 class="text-center" style="margin-top:25px;">Data Edit Menu</h2>
-        <form action="" method="post">
+        <?php 
+
+            $sql = "SELECT * FROM paket_menu WHERE Kd_Paket_Menu='$id'";
+
+            $result = $conn->query($sql);
+            
+            while($row = $result->fetch_assoc()){
+        
+        ?>
+        <form action="../assets/lib/menu/menu_update.php" method="post">
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Kode Paket Menu</label>
-                <input type="text" class="form-control" name="Kd_Paket_Menu" id="formGroupExampleInput"
-                    placeholder="Example input placeholder">
+                <input type="hidden" class="form-control" name="Kd_Paket_Menu" id="formGroupExampleInput"
+                    placeholder="Example input placeholder" value="<?=$row['Kd_Paket_Menu']?>">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">Nama Paket Menu</label>
                 <input type="text" class="form-control" name="Nm_Paket_Menu" id="formGroupExampleInput"
-                    placeholder="Example input placeholder">
+                    placeholder="Example input placeholder" value="<?=$row['Nm_Paket_Menu']?>">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Harga Paket</label>
                 <input type="text" class="form-control" name="Harga_Paket" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder">
+                    placeholder="Another input placeholder" value="<?=$row['Harga_Paket']?>">
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </div>
         </form>
+        <?php } ?>
     </div>
 </body>
 

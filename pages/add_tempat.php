@@ -1,9 +1,3 @@
-<?php 
-    include_once "../assets/lib/conn.php";
-
-    $id = $_GET['id'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,37 +29,23 @@
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center" style="margin-top:25px;">Data Edit Tempat</h2>
-
-        <?php 
-        
-        $sql = "SELECT * FROM tempat WHERE Kd_Tempat='$id'";
-        
-        $result = $conn->query($sql);
-
-        while($row = $result->fetch_assoc()){
-
-        ?>
-        <form action="../assets/lib/tempat/tempat_update.php" method="post">
-            <div class="mb-3">
-                <input type="hidden" class="form-control" name="Kd_Tempat" id="formGroupExampleInput"
-                    placeholder="Example input placeholder" value="<?=$row['Kd_Tempat']?>">
-            </div>
+        <h2 class="text-center" style="margin-top:25px;">Tambah Data Tempat</h2>
+        <form action="../assets/lib/tempat/tempat_add.php" method="post">
+            
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Lokasi Ruangan</label>
                 <input type="text" class="form-control" name="Lokasi_Ruangan" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder" value="<?=$row['Lokasi_Ruangan']?>">
+                    placeholder="Another input placeholder">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Jumlah Kursi</label>
                 <input type="text" class="form-control" name="Jumlah_Kursi" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder" value="<?=$row['Jumlah_Kursi']?>">
+                    placeholder="Another input placeholder">
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </div>
         </form>
-        <?php } ?> 
     </div>
 </body>
 

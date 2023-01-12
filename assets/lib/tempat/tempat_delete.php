@@ -2,9 +2,9 @@
 
 include "../conn.php";
 
-$id = $_POST['Kd_Tempat'];
+$id = $_GET['id'];
 
-$sql = "DELETE FROM tempat WHERE Kd_Tempat=$id";
+$sql = "DELETE FROM tempat WHERE Kd_Tempat='$id'";
 
 if ($conn->query($sql) === TRUE) {
     echo "</script>alert('Record deleted successfully');";

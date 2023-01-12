@@ -1,3 +1,6 @@
+<?php 
+  include_once "assets/lib/conn.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,22 +29,34 @@
 </nav>
 <div class="container">
 <h2 class="text-center" style="margin-top:25px;">Data Admin</h2>
+<a href="pages/add_admin.php" class="btn btn-primary">ADD DATA</a>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">No</th>
+      <th scope="col">Kode Admin</th>
+      <th scope="col">Nama</th>
+      <th scope="col">No Telp</th>
+      <th scope="col">Email</th>
+      <th scope="col">Option</th>
     </tr>
   </thead>
   <tbody>
+    <?php 
+      $sql = "SELECT * FROM admin";
+      $result = $conn->query($sql);
+      $no = 1;
+      while($row = $result->fetch_assoc()){
+    ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td><a href="">EDIT</a> | <a href="">DELETE</a></td>
+      <th scope="row"><?=$no++?></th>
+      <td><?=$row['Kd_Admin']?></td>
+      <td><?=$row['Nm_Admin']?></td>
+      <td><?=$row['No_Tlp']?></td>
+      <td><?=$row['Email']?></td>
+      <td><a href="pages/edit_admin.php?id=<?=$row['Kd_Admin']?>">EDIT</a> | <a href="assets/lib/admin/admin_delete.php?id=<?=$row['Kd_Admin']?>">DELETE</a></td>
     </tr>
+    <?php } ?>
   </tbody>
 </table>
 </div>

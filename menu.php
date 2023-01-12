@@ -1,3 +1,7 @@
+<?php 
+    include_once "assets/lib/conn.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,27 +33,38 @@
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center" style="margin-top:25px;">Data Admin</h2>
+        <h2 class="text-center" style="margin-top:25px;">Data Paket Menu</h2>
+<a href="pages/add_admin.php" class="btn btn-primary">ADD DATA</a>
+
         <table class="table">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th scope="col">Kode Admin</th>
-                    <th scope="col">Nama Admin</th>
-                    <th scope="col">No Telepon</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Kode Paket Menu</th>
+                    <th scope="col">Nama Menu</th>
+                    <th scope="col">Harga Paket</th>
                     <th scope="col">Option</th>
                 </tr>
             </thead>
             <tbody>
+                <?php
+                
+                $sql = "SELECT * FROM paket_menu";
+
+                $result = $conn->query($sql);
+                $no = 1;
+
+                while($row = $result->fetch_assoc()){
+                
+                ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>EDIT | DELETE</td>
+                    <th scope="row"><?=$no++?></th>
+                    <td><?=$row['Kd_Paket_Menu']?></td>
+                    <td><?=$row['Nm_Paket_Menu']?></td>
+                    <td><?=$row['Harga_Paket']?></td>
+                    <td><a href="pages/edit_menu.php?id=<?=$row['Kd_Paket_Menu']?>">EDIT</a> | <a href="assets/lib/menu/menu_delete.php?id=<?=$row['Kd_Paket_Menu']?>">DELETE</a></td>
                 </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

@@ -2,9 +2,9 @@
 
 include "../conn.php";
 
-$id = $_POST['Kd_Admin'];
+$id = $_GET['id'];
 
-$sql = "DELETE FROM admin WHERE Kd_Admin=$id";
+$sql = "DELETE FROM admin WHERE Kd_Admin='$id'";
 
 if ($conn->query($sql) === TRUE) {
   echo "</script>alert('Record deleted successfully');";
@@ -13,4 +13,3 @@ if ($conn->query($sql) === TRUE) {
   echo "Error deleting record: " . $conn->error;
 }
 
-$conn->close();

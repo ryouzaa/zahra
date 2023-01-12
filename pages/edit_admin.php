@@ -1,3 +1,7 @@
+<?php 
+    include_once "../assets/lib/conn.php";
+    $Kd_Admin = $_GET['id']
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,32 +34,39 @@
     </nav>
     <div class="container">
         <h2 class="text-center" style="margin-top:25px;">Edit Data Admin</h2>
-        <form action="" method="post">
+        <?php 
+            $sql = "SELECT * FROM admin WHERE Kd_Admin='$Kd_Admin'";
+            $result = $conn->query($sql);
+
+            while($row = $result->fetch_assoc()){
+
+        ?>
+        <form action="../assets/lib/admin/admin_update.php" method="post">
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">Kode Admin</label>
-                <input type="text" class="form-control" name="Kd_Admin" id="formGroupExampleInput"
-                    placeholder="Example input placeholder">
+                <input type="hidden" class="form-control" name="Kd_Admin" id="formGroupExampleInput"
+                    placeholder="Example input placeholder" value="<?=$row['Kd_Admin']?>">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Nama Admin</label>
                 <input type="text" class="form-control" name="Nm_Admin" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder">
+                    placeholder="Another input placeholder" value="<?=$row['Nm_Admin']?>">
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">No Telepon</label>
                 <input type="text" class="form-control" name="No_Tlp" id="formGroupExampleInput2"
-                    placeholder="Masukan No">
+                    placeholder="Masukan No" value="<?=$row['No_Tlp']?>">
             </div>
 
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">Email</label>
                 <input type="text" class="form-control" name="Email" id="formGroupExampleInput2"
-                    placeholder="Nama Email">
+                    placeholder="Nama Email" value="<?=$row['Email']?>">
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </div>
         </form>
+        <?php } ?>
     </div>
 </body>
 

@@ -1,8 +1,3 @@
-<?php 
-    include_once "../assets/lib/conn.php";
-
-    $id = $_GET['id'];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,44 +23,37 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="?hal=admin">Admin</a>
                     <a class="nav-link" href="menu.php">Paket Menu</a>
-                    <a class="nav-link" href="">Reservasi</a>
+                    <a class="nav-link" href="#">Reservasi</a>
                     <a class="nav-link" href="tempat.php">Tempat</a>
                 </div>
             </div>
         </div>
     </nav>
     <div class="container">
-        <h2 class="text-center" style="margin-top:25px;">Data Edit Tempat</h2>
-
-        <?php 
+        <h2 class="text-center" style="margin-top:25px;">Edit Data Admin</h2>
         
-        $sql = "SELECT * FROM tempat WHERE Kd_Tempat='$id'";
-        
-        $result = $conn->query($sql);
-
-        while($row = $result->fetch_assoc()){
-
-        ?>
-        <form action="../assets/lib/tempat/tempat_update.php" method="post">
+        <form action="../assets/lib/admin/admin_add.php" method="post">
+            
             <div class="mb-3">
-                <input type="hidden" class="form-control" name="Kd_Tempat" id="formGroupExampleInput"
-                    placeholder="Example input placeholder" value="<?=$row['Kd_Tempat']?>">
+                <label for="formGroupExampleInput2" class="form-label">Nama Admin</label>
+                <input type="text" class="form-control" name="Nm_Admin" id="formGroupExampleInput2"
+                    placeholder="Another input placeholder" >
             </div>
             <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Lokasi Ruangan</label>
-                <input type="text" class="form-control" name="Lokasi_Ruangan" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder" value="<?=$row['Lokasi_Ruangan']?>">
+                <label for="formGroupExampleInput2" class="form-label">No Telepon</label>
+                <input type="text" class="form-control" name="No_Tlp" id="formGroupExampleInput2"
+                    placeholder="Masukan No" >
             </div>
+
             <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Jumlah Kursi</label>
-                <input type="text" class="form-control" name="Jumlah_Kursi" id="formGroupExampleInput2"
-                    placeholder="Another input placeholder" value="<?=$row['Jumlah_Kursi']?>">
+                <label for="formGroupExampleInput2" class="form-label">Email</label>
+                <input type="text" class="form-control" name="Email" id="formGroupExampleInput2"
+                    placeholder="Nama Email">
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary" name="submit">Submit</button>
             </div>
         </form>
-        <?php } ?> 
     </div>
 </body>
 

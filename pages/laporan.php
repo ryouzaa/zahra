@@ -1,3 +1,7 @@
+<?php 
+    include_once "../assets/lib/conn.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,27 +34,54 @@
     </nav>
     <div class="container">
         <h2 class="text-center" style="margin-top:25px;">Laporan Reservasi</h2>
-        <table class="table">a
+        <table class="table">
             <thead>
                 <tr>
                     <th scope="col">No</th>
                     <th scope="col">Kode Reservasi</th>
+                    <th scope="col">Nama Pemesan</th>
                     <th scope="col">Tanggal Reservasi</th>
-                    <th scope="col">Total Pesanan</th>
+                    <th scope="col">Waktu Reservasi</th>
+                    <th scope="col">Jumlah Tamu</th>
+                    <th scope="col">Jumlah Pesanan</th>
+                    <th scope="col">Nama Paket Menu</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Tempat</th>
+                    <th scope="col">Catatan</th>
                 </tr>
             </thead>
             <tbody>
+                <?php 
+                    $sql = "SELECT * FROM reservasi a, admin b, paket_menu c, tempat d WHERE a.Kd_Admin = b.Kd_Admin AND a.Kd_Paket_Menu = c.Kd_Paket_Menu AND a.Kd_Tempat=d.Kd_Tempat";
+
+                    $result = $conn->query($sql);
+                    $no = 1;
+                    while($row = $result->fetch_assoc()){
+                ?>
                 <tr>
-                    <th scope="row">1</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><a href="">EDIT</a> | <a href="">DELETE</a></td>
+                    <th scope="row"><?=$no++?></th>
+                    <td><?=$row['Kd_Reservasi']?></td>
+                    <td><?=$row['Nm_Konsumen']?></td>
+                    <?php
+                        $date = date_create($row['Tgl_Reservasi']);
+                        $tglResv_format = date_format($date, "d/m/Y");
+                        echo "<td>$tglResv_format</td>";
+                    ?>
+                    <td><?=$row['Jam_Datang']?></td>
+                    <td><?=$row['Total_Tamu']?></td>
+                    <td><?=$row['Total_Pesanan_Paket']?></td>
+                    <td><?=$row['Nm_Paket_Menu']?></td>
+                    <td>Rp. <?=$row['Harga_Paket']*$row['Total_Pesanan_Paket']?></td>
+                    <td><?=$row['Lokasi_Ruangan']?></td>
+                    <td><?=$row['Catatan_Konsumen']?></td>
                 </tr>
+                <?php } ?> 
             </tbody>
         </table>
     </div>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
